@@ -20,7 +20,6 @@ class TrajectoryFollowTest:
         
         self.vehicle_state_history = VehicleStateHistory(agent_name, map_name)
         
-
     def plan(self, obs):
         nn_state = self.transform_obs(obs)
         
