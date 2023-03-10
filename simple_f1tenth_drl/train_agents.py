@@ -3,8 +3,10 @@ from simple_f1tenth_drl.LearningAlgorithms.sac import TrainSAC, TestSAC
 from simple_f1tenth_drl.LearningAlgorithms.ddpg import TrainDDPG, TestDDPG
 from simple_f1tenth_drl.LearningAlgorithms.td3 import TrainTD3, TestTD3
 
-from simple_f1tenth_drl.Planners.TrajectoryFollowAgents import TrajectoryFollowTrain, TrajectoryFollowTest
-from simple_f1tenth_drl.Planners.EndToEndAgents import EndToEndTrain, EndToEndTest
+from simple_f1tenth_drl.Planners.TrainTrajectoryFollow import TrajectoryFollowTrain
+from simple_f1tenth_drl.Planners.TestTrajectoryFollow import TrajectoryFollowTest
+from simple_f1tenth_drl.Planners.TestEndToEnd import EndToEndTest
+from simple_f1tenth_drl.Planners.TrainEndToEnd import EndToEndTrain
 
 import numpy as np
 
@@ -84,6 +86,6 @@ def train_trajectoryFollowing_agent():
   
   
 if __name__ == "__main__":
-    # train_endToEnd_agent()
-    train_trajectoryFollowing_agent()
+    train_endToEnd_agent()
+    # train_trajectoryFollowing_agent()
     

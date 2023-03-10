@@ -127,8 +127,6 @@ class EndToEndTrain:
         return action
     
     
-
-class EndToEndTest: 
     def __init__(self, Agent):
         self.scan_buffer = np.zeros((NUMBER_SCANS, NUMBER_BEAMS))
         self.state_space = NUMBER_SCANS * NUMBER_BEAMS

@@ -4,7 +4,7 @@ import os
 class VehicleStateHistory:
     def __init__(self, test_name, map_name):
         self.vehicle_name = test_name
-        self.path = "Data/" + test_name + f"/Testing_{map_name.upper()}" 
+        self.path = "Data/" + test_name + f"/Testing_{map_name.upper()}/" 
         if os.path.exists(self.path) == False:
             os.mkdir(self.path)
         self.states = []

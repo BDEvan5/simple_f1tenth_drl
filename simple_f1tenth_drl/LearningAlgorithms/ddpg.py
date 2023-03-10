@@ -1,6 +1,5 @@
 from RacingDRL.Utils.Networks import DoublePolicyNet, DoubleQNet
 from RacingDRL.Utils.ReplayBuffers import OffPolicyBuffer
-from RacingDRL.Utils.utils import soft_update
 
 import torch.optim as optim
 import numpy as np
@@ -82,4 +81,7 @@ class TestDDPG:
         
         return action
       
-        
+            
+def soft_update(net, net_target, tau):
+    for param_target, param in zip(net_target.parameters(), net.parameters()):
+        param_target.data.copy_(param_target.data * (1.0 - tau) + param.data * tau)

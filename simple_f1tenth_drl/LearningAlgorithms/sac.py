@@ -14,7 +14,6 @@ LR = 1e-3
    
 from RacingDRL.Utils.Networks import DoublePolicyNet, DoubleQNet, PolicyNetworkSAC
 from RacingDRL.Utils.ReplayBuffers import OffPolicyBuffer
-from RacingDRL.Utils.utils import soft_update
 
 
 class TrainSAC:
@@ -112,5 +111,8 @@ class TestSAC:
         return action.detach().numpy()
       
         
-
+    
+def soft_update(net, net_target, tau):
+    for param_target, param in zip(net_target.parameters(), net.parameters()):
+        param_target.data.copy_(param_target.data * (1.0 - tau) + param.data * tau)
      
