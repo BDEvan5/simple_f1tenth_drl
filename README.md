@@ -10,6 +10,7 @@ The aim is to provide a simple implementation that can help people to understand
 ```
 git clone https://github.com/BDEvan5/simple_f1tenth_drl
 cd simple_f1tenth_drl
+mkdir Data/
 pip install -e .
 ```
 
