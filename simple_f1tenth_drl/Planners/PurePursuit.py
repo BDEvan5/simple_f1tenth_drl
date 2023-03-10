@@ -11,69 +11,42 @@ Adjustments have been made
 """
 
 import numpy as np
-from FoneTenth.Utils.utils import init_file_struct, calculate_speed
 from numba import njit
-import csv
 import os
-from matplotlib import pyplot as plt
-from RacingDRL.Planners.TrackLine import TrackLine
-from RacingDRL.Planners.VehicleStateHistory import VehicleStateHistory
+from simple_f1tenth_drl.PlannerUtils.TrackLine import TrackLine
+from simple_f1tenth_drl.PlannerUtils.VehicleStateHistory import VehicleStateHistory
 
+LOOKAHEAD_DISTANCE = 1
+WHEELBASE = 0.33
+MAX_STEER = 0.4
+MAX_SPEED = 8
 
 
 class PurePursuit:
-    def __init__(self, conf, run, init=True):
-        self.name = run.run_name
-        path = os.getcwd() + f"/Data/" + run.path  + self.name + "/"
+    def __init__(self, map_name, test_name):
+        path = f"Data/" + test_name + "/"
         if not os.path.exists(path):
             os.mkdir(path)
-        elif init:
-            init_file_struct(path)
             
-        self.conf = conf
-        self.run = run
+        self.track_line = TrackLine(map_name, True, False)
 
-        self.racing_line = run.racing_line
-        self.speed_mode = run.pp_speed_mode
-        self.max_speed = run.max_speed
-        self.track_line = TrackLine(run.map_name, run.racing_line, False)
-        # self.track_line = TrackLine(run.map_name, run.racing_line, True)
-        self.lookahead = run.lookahead
-
-        # self.lookahead = conf.lookahead 
-        self.v_min_plan = conf.v_min_plan
-        self.wheelbase =  conf.l_f + conf.l_r
-        self.max_steer = conf.max_steer
-        
-        self.vehicle_state_history = VehicleStateHistory(run, f"Testing{run.map_name.upper()}/")
+        self.vehicle_state_history = VehicleStateHistory(test_name, map_name)
 
         self.counter = 0
 
     def plan(self, obs):
         position = np.array([obs['poses_x'][0], obs['poses_y'][0]])
         theta = obs['poses_theta'][0]
-        # lookahead = 1.9
-        # lookahead = 1.5
-        # lookahead = 0.8 + 0.6* obs['linear_vels_x'][0] /  8
         
-        lookahead = self.lookahead
-        lookahead_point = self.track_line.get_lookahead_point(position, lookahead)
+        lookahead_point = self.track_line.get_lookahead_point(position, LOOKAHEAD_DISTANCE)
 
-        if obs['linear_vels_x'][0] < self.v_min_plan:
+        if obs['linear_vels_x'][0] < 1:
             return np.array([0.0, 4])
 
-        speed_raceline, steering_angle = get_actuation(theta, lookahead_point, position, lookahead, self.wheelbase)
-        steering_angle = np.clip(steering_angle, -self.max_steer, self.max_steer)
-        if self.speed_mode == 'constant':
-            speed = 2
-        elif self.speed_mode == 'link':
-            speed = calculate_speed(steering_angle, 0.8, 7)
-        elif self.speed_mode == 'racing_line':
-            speed = speed_raceline 
-        else:
-            raise Exception(f"Invalid speed mode: {self.speed_mode}")
+        speed_raceline, steering_angle = get_actuation(theta, lookahead_point, position, LOOKAHEAD_DISTANCE, WHEELBASE)
+        steering_angle = np.clip(steering_angle, -MAX_STEER, MAX_STEER)
             
-        speed = min(speed, self.max_speed) # cap the speed
+        speed = min(speed_raceline, MAX_SPEED) # cap the speed
 
         action = np.array([steering_angle, speed])
         

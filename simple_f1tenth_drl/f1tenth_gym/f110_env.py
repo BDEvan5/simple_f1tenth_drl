@@ -296,6 +296,9 @@ class F110Env(gym.Env):
             obs['collisions'][0] = True
             done = True
         info = {'checkpoint_done': toggle_list}
+        
+        if obs['lap_times'][0] > 150:
+            done = True
 
         return obs, reward, done, info
 
