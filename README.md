@@ -5,6 +5,14 @@ The aim is to provide a simple implementation that can help people to understand
 
 # Use
 
+## Installation
+
+```
+git clone https://github.com/BDEvan5/simple_f1tenth_drl
+cd simple_f1tenth_drl
+pip install -e .
+```
+
 ## Task Description
 
 The `train_agents.py` file is the main entry point to train agents.
@@ -15,6 +23,8 @@ Agents can be trained for two tasks:
 In both cases, the action space is the steering angle and vehicle speed.
 
 The `test_agents.py` file has functions to test the agents (for each task) on the training maps, or on all of the maps.
+
+The pure pursuit planner is given for comparison and can be tested using the `test_pure_pursuit.py` file.
 
 ## Component Description
 
@@ -46,10 +56,11 @@ For the tests, a subfolder is created called, `TestingMAPNAME`, with the test ma
 Inside, the full vehicle state and actions selected at each timestep is saved for analysis.
 
 The DataTools can analyse this data and make pretty plots.
+- GenerateTrajectoryAnalysis: for each vehicle and test, plots the speed, slip, centre line deviation etc, for the trajectory around the traick.
+- GenerateVelocityProfiles: plots a colour line to represent the velocity profile around the race track.
 
-### Comparison
 
-The pure pursuit planner is given for comparison and can be tested using the `test_pure_pursuit.py` file.
+
 
 
 
