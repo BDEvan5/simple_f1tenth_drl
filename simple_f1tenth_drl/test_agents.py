@@ -56,7 +56,8 @@ def test_trajectoryFollowing_agent():
     planner = TrajectoryFollowTest(test_agent, map_name, agent_name)
     run_simulation_loop_laps(env, planner, n_test_laps)
   
-def test_endToEnd_agent():
+  
+def test_endToEnd_agent_all_maps():
     map_names = ["aut", "esp", "gbr", "mco"]
     agent_name = "myFavouriteAgent_SAC"
     n_test_laps = 2
@@ -68,7 +69,7 @@ def test_endToEnd_agent():
         run_simulation_loop_laps(env, planner, n_test_laps)
   
   
-def test_trajectoryFollowing_agent():
+def test_trajectoryFollowing_agent_all_maps():
     map_names = ["aut", "esp", "gbr", "mco"]
     agent_name = "myFavouriteAgentTF_SAC"
     n_test_laps = 2
@@ -82,5 +83,7 @@ def test_trajectoryFollowing_agent():
   
 if __name__ == "__main__":
     # test_endToEnd_agent()
-    test_trajectoryFollowing_agent()
+    # test_trajectoryFollowing_agent()
+    test_endToEnd_agent_all_maps()
+    test_trajectoryFollowing_agent_all_maps()
     
