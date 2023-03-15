@@ -37,7 +37,7 @@ from PIL import Image
 import yaml
 
 # helpers
-from RacingDRL.f1tenth_gym.collision_models import get_vertices
+from simple_f1tenth_drl.f1tenth_gym.collision_models import get_vertices
 
 # zooming constants
 ZOOM_IN_FACTOR = 1.2

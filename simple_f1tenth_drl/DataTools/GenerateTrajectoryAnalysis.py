@@ -73,7 +73,6 @@ class AnalyseTestLapData:
             self.plot_speed_graph()
             self.plot_slip_graph()
             self.plot_steering_graph()
-            self.plot_speed_graph2()
             self.plot_center_line_deviation()
 
     def load_lap_data(self):

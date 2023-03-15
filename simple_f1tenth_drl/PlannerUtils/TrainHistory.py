@@ -2,12 +2,35 @@ import os, shutil
 import csv
 import numpy as np
 from matplotlib import pyplot as plt
-from FoneTenth.Utils.utils import *
+# from simple_f1tenth_drl.PlannerUtils.utils import *
 from matplotlib.ticker import MultipleLocator
 
 
 SIZE = 20000
 
+def true_moving_average(data, period):
+    if len(data) < period:
+        return np.zeros_like(data)
+    ret = np.convolve(data, np.ones(period), 'same') / period
+    # t_end = np.convolve(data, np.ones(period), 'valid') / (period)
+    # t_end = t_end[-1] # last valid value
+    for i in range(period): # start
+        t = np.convolve(data, np.ones(i+2), 'valid') / (i+2)
+        ret[i] = t[0]
+    for i in range(period):
+        length = int(round((i + period)/2))
+        t = np.convolve(data, np.ones(length), 'valid') / length
+        ret[-i-1] = t[-1]
+    return ret
+
+
+def save_csv_array(data, filename):
+    with open(filename, 'w') as file:
+        writer = csv.writer(file)
+        writer.writerows(data)
+
+def moving_average(data, period):
+    return np.convolve(data, np.ones(period), 'same') / period
 
 def plot_data(values, moving_avg_period=10, title="Results", figure_n=2):
     plt.figure(figure_n)

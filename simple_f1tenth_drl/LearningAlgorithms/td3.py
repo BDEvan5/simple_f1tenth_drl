@@ -2,8 +2,8 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from RacingDRL.Utils.Networks import DoublePolicyNet, DoubleQNet
-from RacingDRL.Utils.ReplayBuffers import OffPolicyBuffer
+from simple_f1tenth_drl.PlannerUtils.Networks import DoublePolicyNet, DoubleQNet
+from simple_f1tenth_drl.PlannerUtils.ReplayBuffers import OffPolicyBuffer
 
 # hyper parameters
 BATCH_SIZE = 100

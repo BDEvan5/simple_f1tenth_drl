@@ -1,6 +1,6 @@
 import numpy as np
 
-from RacingDRL.Planners.TrackLine import TrackLine
+from simple_f1tenth_drl.PlannerUtils.TrackLine import TrackLine
 
 
 
@@ -13,7 +13,7 @@ class ProgressReward:
         if prev_obs is None: return 0
 
         if observation['lap_counts'][0]:
-            return 1  # complete
+            return 1  # complet
         if observation['collisions'][0]:
             return -1 # crash
         

@@ -12,8 +12,8 @@ BATCH_SIZE = 100
 LR = 1e-3
 
    
-from RacingDRL.Utils.Networks import DoublePolicyNet, DoubleQNet, PolicyNetworkSAC
-from RacingDRL.Utils.ReplayBuffers import OffPolicyBuffer
+from simple_f1tenth_drl.PlannerUtils.Networks import DoublePolicyNet, DoubleQNet, PolicyNetworkSAC
+from simple_f1tenth_drl.PlannerUtils.ReplayBuffers import OffPolicyBuffer
 
 
 class TrainSAC:

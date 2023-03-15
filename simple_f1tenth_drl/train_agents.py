@@ -58,13 +58,13 @@ def train_endToEnd_agent():
     n_test_laps = 5
     
     env = F110Env(map=map_name, num_agents=1)
-    TrainAgent = TrainSAC # or DDPG, TD3
-    planner = EndToEndTrain(map_name, agent_name, TrainAgent)
+    # TrainAgent = TrainSAC # or DDPG, TD3
+    # planner = EndToEndTrain(map_name, agent_name, TrainAgent)
     
-    run_simulation_loop_steps(env, planner, number_training_stpes)
+    # run_simulation_loop_steps(env, planner, number_training_stpes)
     
-    TestAgent = TestSAC # or DDPG, TD3
-    planner = EndToEndTest(TestAgent)
+    test_agent = TestSAC(agent_name, f"Data/{agent_name}/") # or DDPG, TD3
+    planner = EndToEndTest(test_agent, map_name, agent_name)
     run_simulation_loop_laps(env, planner, n_test_laps)
   
   
@@ -75,10 +75,10 @@ def train_trajectoryFollowing_agent():
     n_test_laps = 5
     
     env = F110Env(map=map_name, num_agents=1)
-    # TrainAgent = TrainSAC # or DDPG, TD3
-    # planner = TrajectoryFollowTrain(map_name, agent_name, TrainAgent)
+    TrainAgent = TrainSAC # or DDPG, TD3
+    planner = TrajectoryFollowTrain(map_name, agent_name, TrainAgent)
     
-    # run_simulation_loop_steps(env, planner, number_training_steps)
+    run_simulation_loop_steps(env, planner, number_training_steps)
     
     test_agent = TestSAC(agent_name, f"Data/{agent_name}/") # or DDPG, TD3
     planner = TrajectoryFollowTest(test_agent, map_name, agent_name)
@@ -86,6 +86,6 @@ def train_trajectoryFollowing_agent():
   
   
 if __name__ == "__main__":
+    train_trajectoryFollowing_agent()
     train_endToEnd_agent()
-    # train_trajectoryFollowing_agent()
     

@@ -61,6 +61,11 @@ The DataTools can analyse this data and make pretty plots.
 - GenerateVelocityProfiles: plots a colour line to represent the velocity profile around the race track.
 
 
+## Improvements:
+- Add experiments to compare algorithms 
+- Add experiment to compare path following vs end-to-end
+- Refactor pure pursuit to use a single folder with multiple Testing folders for different maps.
+
 
 
 

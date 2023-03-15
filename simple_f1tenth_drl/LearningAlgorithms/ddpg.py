@@ -1,5 +1,5 @@
-from RacingDRL.Utils.Networks import DoublePolicyNet, DoubleQNet
-from RacingDRL.Utils.ReplayBuffers import OffPolicyBuffer
+from simple_f1tenth_drl.PlannerUtils.Networks import DoublePolicyNet, DoubleQNet
+from simple_f1tenth_drl.PlannerUtils.ReplayBuffers import OffPolicyBuffer
 
 import torch.optim as optim
 import numpy as np
