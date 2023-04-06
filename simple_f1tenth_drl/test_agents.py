@@ -11,7 +11,7 @@ from simple_f1tenth_drl.Planners.TrainEndToEnd import EndToEndTrain
 import numpy as np
 
 RENDER_ENV = False
-# RENDER_ENV = True
+RENDER_ENV = True
 
 
 def run_simulation_loop_laps(env, planner, n_laps, n_sim_steps=10):
