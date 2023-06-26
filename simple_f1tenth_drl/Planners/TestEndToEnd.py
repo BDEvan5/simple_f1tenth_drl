@@ -61,6 +61,8 @@ class EndToEndTest:
             self.scan_buffer[0, :] = scan
 
         nn_obs = np.reshape(self.scan_buffer, (NUMBER_BEAMS * NUMBER_SCANS))
+        speed = obs['linear_vels_x'][0] / MAX_SPEED
+        nn_obs = np.append(nn_obs, speed)
 
         return nn_obs
     

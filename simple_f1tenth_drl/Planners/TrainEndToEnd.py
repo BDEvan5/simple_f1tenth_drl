@@ -33,7 +33,7 @@ class EndToEndTrain:
         self.reward_generator = ProgressReward(self.std_track)
 
         self.scan_buffer = np.zeros((NUMBER_SCANS, NUMBER_BEAMS))
-        self.state_space = NUMBER_SCANS * NUMBER_BEAMS
+        self.state_space = NUMBER_SCANS * NUMBER_BEAMS + 1
         self.action_space = 2
 
         self.t_his = TrainHistory(self.path)
@@ -114,6 +114,8 @@ class EndToEndTrain:
             self.scan_buffer[0, :] = scan
 
         nn_obs = np.reshape(self.scan_buffer, (NUMBER_BEAMS * NUMBER_SCANS))
+        speed = obs['linear_vels_x'][0] / MAX_SPEED
+        nn_obs = np.append(nn_obs, speed)
 
         return nn_obs
     
